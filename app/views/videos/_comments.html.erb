@@ -1,0 +1,16 @@
+댓글 (<%= @video.comments.count %>)
+<hr>
+<% @video.comments.each do |comment| %>
+ 작성자: <%= comment.user.email %>, <%= time_ago_in_words comment.created_at %> 전
+ <%= simple_format comment.body %>
+ <p><%= link_to "삭제", comment, method: :delete, data: {confirm: "정말로 삭제하시겠습니까?"} if current_user&&(current_user == comment.user)  %></p>
+<% end %>
+
+
+<%= form_for Comment.new, remote: true do |f| %>
+  <div class="form-group">
+  <%= f.hidden_field :video_id, value: @video.id %>
+  <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <%= f.submit "작성", class: "btn btn-danger" %>
+<% end %>

@@ -1,0 +1,12 @@
+<div class="col-3 mb-3">
+  <div class="card">
+    <%= image_tag video.image.url, class: "w-100" if video.image? %>
+    <div class="card-body">
+      <%= link_to video, class: "text-dark" do %>
+      <strong> <%= video.title %> </strong>
+      <p class="small"><%= truncate video.description, length: 30 %></p>
+      <p class="text-gray small"><%= time_ago_in_words video.created_at %>전, 조회수 <%= video.view_count.to_i %>회</p>
+      <%end %>
+    </div>
+  </div>
+</div>
